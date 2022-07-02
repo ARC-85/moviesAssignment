@@ -27,7 +27,7 @@ function MovieListPageTemplate({ movies, title, selectFavourite }) {
 
   const genreId = Number(genreFilter);
 
-  let displayedMovies = movies
+ let displayedMovies = movies
     .filter((m) => {
       return m.title.toLowerCase().search(titleFilter.toLowerCase()) !== -1;
     })
@@ -36,7 +36,7 @@ function MovieListPageTemplate({ movies, title, selectFavourite }) {
     });
 
   const handleChange = (type, value) => {
-    if (type === "name") setTitleFilter(value);
+    if (type === "title") setTitleFilter(value);
     else setGenreFilter(value);
   };
 
@@ -47,7 +47,7 @@ function MovieListPageTemplate({ movies, title, selectFavourite }) {
         <Header title={title} />
       </Grid>
       <Grid item container spacing={5}>
-        <MovieList selectFavourite={selectFavourite} movies={displayedMovies} />
+        <MovieList selectFavourite={selectFavourite} movies={displayedMovies}></MovieList> 
       </Grid>
     </Grid>
     <Fab
