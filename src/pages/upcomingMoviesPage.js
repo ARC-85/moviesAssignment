@@ -6,6 +6,7 @@ import { getUpcomingMovies } from "../api/tmdb-api";
 import AddToMustWatchIcon from '../components/cardIcons/addToMustWatchList';
 
 const UpcomingMoviesPage = (props) => {
+  // useQuery replaced useEffect hook in previous commit (see "Fix upcoming movies page.")
   const {  data, error, isLoading, isError }  = useQuery('upcoming', getUpcomingMovies)
 
   if (isLoading) {
