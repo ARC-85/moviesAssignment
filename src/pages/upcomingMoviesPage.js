@@ -1,5 +1,5 @@
 import React from "react";
-import PageTemplate from "../components/templateMovieListPage";
+import MovieListPageTemplate from "../components/templateMovieListPage";
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
 import { getUpcomingMovies } from "../api/tmdb-api";
@@ -23,7 +23,7 @@ const UpcomingMoviesPage = (props) => {
  
 
   return (
-    <PageTemplate
+    <MovieListPageTemplate
       title='Upcoming Movies'
       movies={movies}
       action={(movie) => {

@@ -8,6 +8,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import CalendarIcon from "@material-ui/icons/CalendarTodayTwoTone";
 import StarRateIcon from "@material-ui/icons/StarRate";
 import Grid from "@material-ui/core/Grid";
@@ -26,11 +27,18 @@ const useStyles = makeStyles({
 export default function MovieCard({ movie, action }) {
   const classes = useStyles();
   const { favourites } = useContext(MoviesContext);
+  const { myMustWatches } = useContext(MoviesContext);
 
   if (favourites.find((id) => id === movie.id)) {
     movie.favourite = true;
   } else {
     movie.favourite = false
+  };
+
+  if (myMustWatches.find((id) => id === movie.id)) {
+    movie.myMustWatches = true;
+  } else {
+    movie.myMustWatches = false
   }
 
 
@@ -40,11 +48,16 @@ export default function MovieCard({ movie, action }) {
       <CardHeader
       className={classes.header}
       avatar={
-        movie.favourite ? (
+        movie.myMustWatches ? (
+          <Avatar className={classes.avatar}>
+            <PlaylistAddIcon />
+          </Avatar>
+        ) : movie.favourite ? (
           <Avatar className={classes.avatar}>
             <FavoriteIcon />
           </Avatar>
-        ) : null
+        ) :    
+        null
       }
       title={
         <Typography variant="h5" component="p">
