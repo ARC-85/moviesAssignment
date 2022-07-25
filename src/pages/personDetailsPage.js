@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import PersonDetails from "../components/personDetails";
-import PersonPageTemplate from "../components/templatePersonPage";
+import TemplatePersonPage from "../components/templatePersonPage";
 // import useMovie from "../hooks/useMovie";   Redundant
 import { getPerson } from '../api/tmdb-api'
 import { useQuery } from "react-query";
@@ -13,6 +13,7 @@ const PersonDetailsPage = () => {
     ["person", { id: id }],
     getPerson
   );
+  console.log("this is person " + id)
 
   if (isLoading) {
     return <Spinner />;
@@ -26,9 +27,9 @@ const PersonDetailsPage = () => {
     <>
       {person ? (
         <>
-          <PersonPageTemplate person={person}>
+          <TemplatePersonPage person={person}>
             <PersonDetails person={person} />
-          </PersonPageTemplate>
+          </TemplatePersonPage>
         </>
       ) : (
         <p>Waiting for actor details</p>

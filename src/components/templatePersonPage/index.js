@@ -29,6 +29,7 @@ const TemplatePersonPage = ({ person, children }) => {
     ["images", { id: person.id }],
     getPersonImages
   );
+  console.log("this is person id " + person.id)
 
   if (isLoading) {
     return <Spinner />;
@@ -37,7 +38,8 @@ const TemplatePersonPage = ({ person, children }) => {
   if (isError) {
     return <h1>{error.message}</h1>;
   }
-  const images = data.posters 
+  const images = data.profiles 
+  console.log("this is person images " + images)
 
   return (
     <div className={classes.root}>
