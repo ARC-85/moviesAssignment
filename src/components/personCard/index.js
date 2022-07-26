@@ -13,7 +13,7 @@ import StarRateIcon from "@material-ui/icons/StarRate";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
-import { PersonsContext } from "../../contexts/personsContext";
+import { MoviesContext } from "../../contexts/moviesContext";
 
 const useStyles = makeStyles({
   card: { maxWidth: 345 },
@@ -25,28 +25,28 @@ const useStyles = makeStyles({
 
 export default function PersonCard({ person, action }) {
   const classes = useStyles();
-  /* const { favouritePersons } = useContext(PersonsContext);
+  const { favouritePersons } = useContext(MoviesContext);
   
 
   if (favouritePersons.find((id) => id === person.id)) {
     person.favourite = true;
   } else {
     person.favourite = false
-  }; */
+  }; 
 
   
   return (
     <Card className={classes.card}>
       <CardHeader
       className={classes.header}
-      /* avatar={
+      avatar={
         person.favourite ? (
           <Avatar className={classes.avatar}>
             <FavoriteIcon />
           </Avatar>
         ) :    
         null
-      } */
+      } 
       title={
         <Typography variant="h5" component="p">
           {person.name}{" "}
@@ -72,7 +72,7 @@ export default function PersonCard({ person, action }) {
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
-        
+      {action(person)}
         <Link to={`/person/${person.id}`}>
           <Button variant="outlined" size="medium" color="primary">
             More Info ...

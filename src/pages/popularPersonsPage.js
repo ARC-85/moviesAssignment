@@ -3,11 +3,12 @@ import PersonListPageTemplate from "../components/templatePersonListPage";
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
 import { getPopularPersons } from "../api/tmdb-api";
+import AddToFavouritesIcon from '../components/cardIcons/addToFavourites';
 
 
 const PopularPersonsPage = (props) => {
-  // useQuery replaced useEffect hook in previous commit (see "Fix upcoming movies page.")
-  const {  data, error, isLoading, isError }  = useQuery('upcoming', getPopularPersons)
+  
+  const {  data, error, isLoading, isError }  = useQuery('popularPersons', getPopularPersons)
 
   if (isLoading) {
     return <Spinner />
@@ -26,7 +27,9 @@ const PopularPersonsPage = (props) => {
     <PersonListPageTemplate
       title='Popular Actors'
       persons={persons}
-      
+      action={(person) => {
+        return <AddToFavouritesIcon person={person} />
+      }}
     />
   );
 };

@@ -28,7 +28,7 @@ function PersonListPageTemplate({ persons, name, action }) {
  let displayedPersons = persons
     .filter((p) => {
       return p.name.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
-    })
+    });
 
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
