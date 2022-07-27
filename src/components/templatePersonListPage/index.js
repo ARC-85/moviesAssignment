@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) =>  ({
   },
 }));
 
-function PersonListPageTemplate({ persons, name, action }) {
+function PersonListPageTemplate({ persons, title, action }) {
   const classes = useStyles();
   const [nameFilter, setNameFilter] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -38,7 +38,7 @@ function PersonListPageTemplate({ persons, name, action }) {
     <>
     <Grid container className={classes.root}>
       <Grid item xs={12}>
-        <Header name={name} />
+        <Header title={title} />
       </Grid>
       <Grid item container spacing={5}>
           <PersonList action={action} persons={displayedPersons} />

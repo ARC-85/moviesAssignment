@@ -12,8 +12,8 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage';
 import PopularPersonsPage from "./pages/popularPersonsPage";
-import PersonsContextProvider from "./contexts/personsContext";
 import PersonDetailsPage from "./pages/personDetailsPage";
+import MovieCastPage from "./pages/movieCastPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,18 +32,17 @@ const App = () => {
         <SiteHeader />
         <MoviesContextProvider>
           <Routes>
-          <Route path="/reviews/form" element={<AddMovieReviewPage/>} />
-        <Route path="/reviews/:id" element={<MovieReviewPage/>} />
-        <Route path="/movies/favourites" element={<FavouriteMoviesPage/>} />
-        <Route path="/movies/:id" element={<MovieDetailsPage/>} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
-        
-        <Route path="*" element={<Navigate to="/" replace />} />
-        
+            <Route path="/reviews/form" element={<AddMovieReviewPage/>} />
+            <Route path="/reviews/:id" element={<MovieReviewPage/>} />
+            <Route path="/movies/favourites" element={<FavouriteMoviesPage/>} />
+            <Route path="/movies/:id" element={<MovieDetailsPage/>} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
             <Route path="/actors/popular" element={<PopularPersonsPage />} />
             <Route path="/person/:id" element={<PersonDetailsPage/>} />
-            </Routes>
+            <Route path="/movies/:id/cast" element={<MovieCastPage/>} />
+          </Routes>
         </MoviesContextProvider>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />

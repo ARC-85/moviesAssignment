@@ -18,6 +18,7 @@ const PopularPersonsPage = (props) => {
     return <h1>{error.message}</h1>
   }  
   const persons = data.results;
+  console.log(persons)
 
   const favouritePersons = persons.filter(p => p.favouritePerson)
   localStorage.setItem('favouritePersons', JSON.stringify(favouritePersons))

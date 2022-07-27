@@ -58,7 +58,7 @@ export default function PersonCard({ person, action }) {
         image={
           person.profile_path
             ? `https://image.tmdb.org/t/p/w500/${person.profile_path}`
-            : `${process.env.PUBLIC_URL}/assets/person.png`
+            : `${process.env.PUBLIC_URL}/assets/person.jpg`
         }
       />
       <CardContent>
