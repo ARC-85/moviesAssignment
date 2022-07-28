@@ -78,6 +78,11 @@ export default function PersonCard({ person, action }) {
             More Info ...
           </Button>
         </Link>
+        <Link to={`/person/${person.id}/movie_credits`}>
+          <Button variant="outlined" size="medium" color="primary">
+            Movie Credits ...
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );
