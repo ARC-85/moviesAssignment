@@ -17,6 +17,7 @@ import MovieCastPage from "./pages/movieCastPage";
 import PersonMoviesPage from "./pages/personMoviesPage";
 import TVSeriesPage from "./pages/tvSeriesPage";
 import TVSeriesDetailsPage from "./pages/tvSeriesDetailsPage";
+import SimilarMoviesPage from "./pages/similarMoviesPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -48,6 +49,7 @@ const App = () => {
             <Route path="/person/:id/movie_credits" element={<PersonMoviesPage/>} />
             <Route path="/tvseries" element={<TVSeriesPage/>} />
             <Route path="/tvseries/:id" element={<TVSeriesDetailsPage/>} />
+            <Route path="/movies/:id/similarmovies" element={<SimilarMoviesPage/>} />
           </Routes>
         </MoviesContextProvider>
       </BrowserRouter>

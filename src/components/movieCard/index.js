@@ -15,6 +15,7 @@ import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import { MoviesContext } from "../../contexts/moviesContext";
+import SimilarMoviesIcon from "@material-ui/icons/Movie";
 
 const useStyles = makeStyles({
   card: { maxWidth: 345 },
@@ -91,6 +92,9 @@ export default function MovieCard({ movie, action }) {
       </CardContent>
       <CardActions disableSpacing>
         {action(movie)}
+        <Link to={`/movies/${movie.id}/similarmovies`}    >
+      <SimilarMoviesIcon color="primary" fontSize="large" />
+    </Link>
         <Link to={`/movies/${movie.id}`}>
           <Button variant="outlined" size="medium" color="primary">
             More Info ...
