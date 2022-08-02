@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../headerMovieList";
 import FilterCard from "../filterMoviesCard";
 import Grid from "@material-ui/core/Grid";
@@ -25,8 +25,12 @@ function MovieListPageTemplate({ movies, title, action }) {
   const [titleFilter, setTitleFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [sortType, setSortType] = useState('none');
+  
 
   const genreId = Number(genreFilter);
+  
+  
 
  let displayedMovies = movies
     .filter((m) => {
@@ -34,11 +38,15 @@ function MovieListPageTemplate({ movies, title, action }) {
     })
     .filter((m) => {
       return genreId > 0 ? m.genre_ids.includes(genreId) : true;
+    })
+    .sort((a, b) => {
+      return b[sortType] > a[sortType] ? -1 : 1
     });
 
   const handleChange = (type, value) => {
     if (type === "title") setTitleFilter(value);
     else setGenreFilter(value);
+    console.log(value)
   };
 
   return (
@@ -68,6 +76,8 @@ function MovieListPageTemplate({ movies, title, action }) {
           onUserInput={handleChange}
           titleFilter={titleFilter}
           genreFilter={genreFilter}
+          setSortType={setSortType}
+          sortType={sortType}
         />
       </Drawer>
     </>    

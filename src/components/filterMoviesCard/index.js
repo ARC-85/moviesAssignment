@@ -26,10 +26,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 export default function FilterMoviesCard(props) {
   const classes = useStyles();
   const { data, error, isLoading, isError } = useQuery("genres", getGenres);
-
+   
   if (isLoading) {
     return <Spinner />;
   }
@@ -40,7 +42,10 @@ export default function FilterMoviesCard(props) {
   const genres = data.genres;
   if (genres[0].name !== "All"){
     genres.unshift({ id: "0", name: "All" });
-  }
+  };
+
+  
+
 
   const handleChange = (e, type, value) => {
     e.preventDefault();
@@ -98,6 +103,18 @@ export default function FilterMoviesCard(props) {
             Sort the movies.
           </Typography>
         </CardContent>
+        
+          <Select 
+          
+          value={props.sortType}
+          onChange={(e) => props.setSortType(e.target.value)}
+          >
+            <MenuItem value="none" disabled>None</MenuItem>
+            <MenuItem value="original_title">Movie Title</MenuItem>
+            <MenuItem value="vote_average">Popularity</MenuItem>
+            
+          </Select>
+        
       </Card>
       </>
   );
