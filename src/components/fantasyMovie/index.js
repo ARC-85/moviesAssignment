@@ -10,6 +10,10 @@ import { Link } from "react-router-dom";
 import Snackbar from "@material-ui/core/Snackbar"; 
 import MuiAlert from "@material-ui/lab/Alert";
 import {useNavigate} from 'react-router-dom';
+import DateFnsUtils from '@date-io/date-fns';
+import { DatePicker, DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import moment from 'moment';
+
 
 
 
@@ -46,7 +50,8 @@ const FantasyMovie = () => {
   const context = useContext(MoviesContext);
   
   const [open, setOpen] = useState(false);  //NEW
-  const navigate = useNavigate()          
+  const navigate = useNavigate()     
+  const [selectedDate, handleDateChange] = useState(new Date());     
 
 
 
@@ -144,6 +149,36 @@ const FantasyMovie = () => {
             {errors.fantasyPlot.message}
           </Typography>
         )}
+        
+        <br></br>
+        <TextField
+          className={classes.textField}
+          variant="standard"
+          type="hidden"
+          hidden
+          margin="normal"
+          value={moment(selectedDate).format("DD/MM/YYYY")}
+          id="releaseDate"
+          
+          name="releaseDate"
+          autoFocus
+          inputRef={register({ required: "Writer name required" })}
+        />
+        <br></br>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      
+      <DatePicker
+        value={selectedDate}
+        disablePast
+        onChange={handleDateChange}
+        label="Release date"
+        name="selectedDate"
+        id="selectedDate"
+        showTodayButton
+      />
+    </MuiPickersUtilsProvider>
+
+    
        
 
         <Box className={classes.buttons}>

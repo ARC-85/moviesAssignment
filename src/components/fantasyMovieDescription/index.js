@@ -88,6 +88,8 @@ const FantasyMovieDescription = () => {
   const combinedPersons = [{...roleArray}];
   console.log(combinedPersons);
 
+  
+
        
 
 
@@ -112,6 +114,21 @@ const FantasyMovieDescription = () => {
         <Grid item container spacing={0}>
       <Typography variant="h5" component="h1" >
        {myFantasyMovie.fantasyTitle}
+        
+    
+      </Typography>
+        </Grid>
+        <br></br>
+        <Grid item container spacing={0}>
+      
+      <Typography variant="h4" component="h1" >
+        {"Movie Release Date: "}
+      </Typography>
+
+        </Grid>
+        <Grid item container spacing={0}>
+      <Typography variant="h5" component="h1" >
+       {myFantasyMovie.releaseDate}
         
     
       </Typography>
