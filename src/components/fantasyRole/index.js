@@ -1,0 +1,147 @@
+import React, { useContext, useState } from "react";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import { useForm } from "react-hook-form";
+import { MoviesContext } from "../../contexts/moviesContext";
+import { Link } from "react-router-dom";
+import Snackbar from "@material-ui/core/Snackbar"; 
+import MuiAlert from "@material-ui/lab/Alert";
+import {useNavigate} from 'react-router-dom';
+
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  form: {
+    width: "100%",
+    "& > * ": {
+      marginTop: theme.spacing(2),
+    },
+  },
+  textField: {
+    width: "40ch",
+  },
+  submit: {
+    marginRight: theme.spacing(2),
+  },
+  snack: {
+     width: "50%",
+     "& > * ": {
+       width: "100%",
+     },
+   },
+}));
+
+const FantasyRole = ({ person }) => {
+  const classes = useStyles();
+  const { register, handleSubmit, errors, reset } = useForm();
+  const context = useContext(MoviesContext);
+  
+  const [open, setOpen] = useState(false);  //NEW
+  const navigate = useNavigate()          
+
+
+
+  const handleSnackClose = (event) => {     
+    setOpen(false);
+    navigate("/fantasymovie");
+  };
+
+  const onSubmit = (fantasyRole) => {
+    fantasyRole.person = person;
+    fantasyRole.id = person.id;
+    fantasyRole.name = person.name;
+    context.addFantasyRole(person, fantasyRole);
+    setOpen(true);   // NEW
+  };
+
+  return (
+    <Box component="div" className={classes.root}>
+      
+      {/* Start new code */}    
+      <Snackbar
+        className={classes.snack}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        open={open}
+        onClose={handleSnackClose}
+      >
+        <MuiAlert
+          severity="success"
+          variant="filled"
+          onClose={handleSnackClose}
+        >
+          <Typography variant="h4">
+            Thank you for submitting your fantasy role
+          </Typography>
+        </MuiAlert>
+      </Snackbar>
+      <form
+        className={classes.form}
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
+        <TextField
+          className={classes.textField}
+          variant="outlined"
+          margin="normal"
+          required
+          id="character"
+          label="Character's name"
+          name="character"
+          autoFocus
+          inputRef={register({ required: "Character name required" })}
+        />
+        {errors.author && (
+          <Typography variant="h6" component="p">
+            {errors.author.message}
+          </Typography>
+        )}
+
+        <TextField
+        className={classes.textField}
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          name="roleDescription"
+          label="Role description"
+          id="roleDescription"
+          multiline
+          minRows={5}
+          inputRef={register({
+            required: "No role description",
+            minLength: { value: 3, message: "Description is too short" },
+          })}
+        />
+        {errors.content && (
+          <Typography variant="h6" component="p">
+            {errors.roleDescription.message}
+          </Typography>
+        )}
+       
+
+        <Box className={classes.buttons}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Submit Fantasy Role
+          </Button>
+          
+        </Box>
+      </form>
+    </Box>
+  );
+};
+
+export default FantasyRole;
