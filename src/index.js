@@ -20,6 +20,8 @@ import TVSeriesDetailsPage from "./pages/tvSeriesDetailsPage";
 import SimilarMoviesPage from "./pages/similarMoviesPage";
 import FantasyMoviePage from "./pages/fantasyMoviePage";
 import CreateRolePage from "./pages/createRolePage";
+import LoginPage from "./pages/loginPage";
+import ProtectedRoute from "./protectedRoute";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,8 +37,9 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <SiteHeader />
+        
         <MoviesContextProvider>
+        <SiteHeader />
           <Routes>
             <Route path="/reviews/form" element={<AddMovieReviewPage/>} />
             <Route path="/reviews/:id" element={<MovieReviewPage/>} />
@@ -52,8 +55,14 @@ const App = () => {
             <Route path="/tvseries" element={<TVSeriesPage/>} />
             <Route path="/tvseries/:id" element={<TVSeriesDetailsPage/>} />
             <Route path="/movies/:id/similarmovies" element={<SimilarMoviesPage/>} />
-            <Route path="/fantasymovie" element={<FantasyMoviePage/>} />
+            <Route path="/fantasymovie" element={
+            <ProtectedRoute>
+              <FantasyMoviePage/>
+            </ProtectedRoute>
+          } 
+          />
             <Route path="/fantasymovie/addrole" element={<CreateRolePage/>} />
+            <Route path="/login" element={<LoginPage/>} />
           </Routes>
         </MoviesContextProvider>
       </BrowserRouter>

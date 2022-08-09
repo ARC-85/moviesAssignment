@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import fakeAuth from "../fakeAuth";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const MoviesContext = React.createContext(null);
 
@@ -11,6 +13,9 @@ const MoviesContextProvider = (props) => {
   const [myMustWatchTVSeries, setMustWatchTVSeries] = useState([]);
   const [myFantasyMovie, setMyFantasyMovie] = useState( {} )
   const [myFantasyRoles, setMyFantasyRoles] = useState([]) 
+  const [token, setToken] = useState({});
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const addToFavourites = (movie) => {
     if (!favourites.includes(movie.id)) {
@@ -88,6 +93,19 @@ const MoviesContextProvider = (props) => {
     console.log(person.id)
   };
 
+  const authenticate = async (username, password) => {
+    const token = await fakeAuth(username, password);
+    setToken(token);
+    const origin = location.state?.intent?.pathname || "/";
+    navigate(origin);
+    console.log(token)
+  };
+  
+  const signout = () => {
+    setToken(null);
+    navigate('/')
+  };
+
 
   return (
     <MoviesContext.Provider
@@ -110,7 +128,10 @@ const MoviesContextProvider = (props) => {
         myFantasyMovie,
         addFantasyRole,
         myFantasyRoles,
-        removeFromRoles
+        removeFromRoles,
+        token,
+        authenticate,
+        signout,
       }}
     >
       {props.children}

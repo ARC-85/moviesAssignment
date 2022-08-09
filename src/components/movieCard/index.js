@@ -30,6 +30,7 @@ export default function MovieCard({ movie, action }) {
   const { favourites } = useContext(MoviesContext);
   const { myMustWatches } = useContext(MoviesContext);
 
+
   if (favourites.find((id) => id === movie.id)) {
     movie.favourite = true;
   } else {
