@@ -11,6 +11,7 @@ import Menu from "@material-ui/core/Menu";
 import { useNavigate, NavLink } from "react-router-dom";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -71,14 +72,16 @@ const SiteHeader = () => {
             All you ever wanted to know about Movies!
           </Typography>
           {token ? (
-        <p>
-          Welcome! <button onClick={() => signout()}>Sign out</button>
-        </p>
+            <Typography variant="h5" className={classes.title}>
+            Welcome!{" "}
+            <Button variant="contained" color="secondary" onClick={() => signout()}>Sign out</Button>
+          </Typography>
       ) : (
-        <p>
-          You are not logged in{" "}
-          <button onClick={() => navigate("login")}>Login</button>
-        </p>
+        <Typography variant="h5" className={classes.title}>
+            You are not logged in{" "}
+            <Button variant="contained" onClick={() => navigate("login")}>Login</Button>
+          </Typography>
+        
       )} 
           {isMobile ? (
             <>

@@ -13,7 +13,7 @@ const MoviesContextProvider = (props) => {
   const [myMustWatchTVSeries, setMustWatchTVSeries] = useState([]);
   const [myFantasyMovie, setMyFantasyMovie] = useState( {} )
   const [myFantasyRoles, setMyFantasyRoles] = useState([]) 
-  const [token, setToken] = useState({});
+  const [token, setToken] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -94,11 +94,14 @@ const MoviesContextProvider = (props) => {
   };
 
   const authenticate = async (username, password) => {
+    if (username === "user1" && password === "password") {
     const token = await fakeAuth(username, password);
     setToken(token);
     const origin = location.state?.intent?.pathname || "/";
     navigate(origin);
-    console.log(token)
+    console.log(token) } else {
+      navigate("/login")
+    }
   };
   
   const signout = () => {
