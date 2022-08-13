@@ -13,9 +13,93 @@ import {useNavigate} from 'react-router-dom';
 import DateFnsUtils from '@date-io/date-fns';
 import { DatePicker, DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import moment from 'moment';
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import Chip from "@material-ui/core/Chip";
+import Paper from "@material-ui/core/Paper";
 
-
-
+const fantasyGenres = [
+  {
+    value: '',
+    label: "None",
+  },
+  {
+    value: "Action",
+    label: "Action",
+  },
+  {
+    value: "Adventure",
+    label: "Adventure",
+  },
+  {
+    value: "Animation",
+    label: "Animation",
+  },
+  {
+    value: "Comedy",
+    label: "Comedy",
+  },
+  {
+    value: "Crime",
+    label: "Crime",
+  },
+  {
+    value: "Documentary",
+    label: "Documentary",
+  },
+  {
+    value: "Drama",
+    label: "Drama",
+  },
+  {
+    value: "Family",
+    label: "Family",
+  },
+  {
+    value: "Fantasy",
+    label: "Fantasy",
+  },
+  {
+    value: "History",
+    label: "History",
+  },
+  {
+    value: "Horror",
+    label: "Horror",
+  },
+  {
+    value: "Music",
+    label: "Music",
+  },
+  {
+    value: "Mystery",
+    label: "Mystery",
+  },
+  {
+    value: "Romance",
+    label: "Romance",
+  },
+  {
+    value: "Sci-Fi",
+    label: "Sci-Fi",
+  },
+  {
+    value: "TV Movie",
+    label: "TV Movie",
+  },
+  {
+    value: "Thriller",
+    label: "Thriller",
+  },
+  {
+    value: "War",
+    label: "War",
+  },
+  {
+    value: "Western",
+    label: "Western",
+  },
+];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,11 +128,22 @@ const useStyles = makeStyles((theme) => ({
    },
 }));
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
 const FantasyMovie = () => {
   const classes = useStyles();
   const { register, handleSubmit, errors, reset } = useForm();
   const context = useContext(MoviesContext);
-  
+  const [myGenres, setMyGenres] = useState([]);
   const [open, setOpen] = useState(false);  //NEW
   const navigate = useNavigate()     
   const [selectedDate, handleDateChange] = useState(new Date());     
@@ -61,10 +156,31 @@ const FantasyMovie = () => {
   };
 
   const onSubmit = (fantasyMovie) => {
-    
+    fantasyMovie.myGenres = myGenres;
     context.addFantasyMovie(fantasyMovie);
     setOpen(true);   // NEW
   };
+
+  const handleGenreChange = (event) => {
+    
+    setMyGenres(
+      myGenres.concat(event.target.value) 
+    );
+    myGenres.filter(function(e){return e});
+
+    console.log(myGenres);
+  };
+
+  const handleGenreReset = () => {
+    setMyGenres(
+      []
+    );
+    myGenres.filter(function(e){return e});
+    
+
+    console.log(myGenres);
+  };
+
 
   return (
     <Box component="div" className={classes.root}>
@@ -152,6 +268,37 @@ const FantasyMovie = () => {
         
         <br></br>
         <TextField
+          id="select-genres"
+          select
+          multiple
+          variant="outlined"
+          label="Genres Select"
+          value={myGenres}
+          onChange={handleGenreChange}
+          
+          MenuProps={MenuProps}
+          helperText="Don't forget your genres"
+        >
+          {fantasyGenres.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+          </TextField>
+          <div className={classes.chipRoot}>
+          <Paper component="ul" className={classes.chipSet}>
+        
+          
+        
+        {myGenres.map((genre) => (
+          <li key={genre}>
+            <Chip label={genre} className={classes.chip} />
+          </li>
+        ))}
+      </Paper>
+      </div>
+        <br></br>
+        <TextField
           className={classes.textField}
           variant="standard"
           type="hidden"
@@ -195,12 +342,15 @@ const FantasyMovie = () => {
             variant="contained"
             color="secondary"
             className={classes.submit}
-            onClick={() => {
-              reset({
-                author: "",
-                fantasyMovie: "",
-              });
-            }}
+            value=""
+            onClick={
+            
+                handleGenreReset
+              
+
+
+        
+            }
           >
             Reset
           </Button>

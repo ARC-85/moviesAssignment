@@ -11,6 +11,8 @@ import { useQueries } from "react-query";
 import { getPerson } from "../../api/tmdb-api";
 import Spinner from "../../components/spinner";
 import Role from "../roleCard";
+import Chip from "@material-ui/core/Chip";
+import Paper from "@material-ui/core/Paper";
 
 
 
@@ -51,6 +53,9 @@ const FantasyMovieDescription = () => {
 
   const roleArray = Object.values(myFantasyRoles);
   console.log(roleArray);
+
+  const myGenresArray = myFantasyMovie.myGenres;
+  console.log(myGenresArray);
 
   
 
@@ -150,6 +155,29 @@ const FantasyMovieDescription = () => {
     
       </Typography>
         </Grid>
+        
+        <br></br>
+        <Grid item container spacing={0}>
+      
+      <Typography variant="h4" component="h1" >
+        {"Genres: "}    
+    
+      </Typography>
+        </Grid>
+        <Grid item container spacing={0}>
+      
+        <div className={classes.chipRoot}>
+          <Paper component="ul" className={classes.chipSet}>
+        {myGenresArray?.map((genre) => (
+          <li key={genre}>
+            <Chip label={genre} className={classes.chip} />
+          </li>
+        ))}
+      </Paper>
+      </div>
+        </Grid>
+
+
     </Grid>
       
       <Grid container className={classes.root}>
