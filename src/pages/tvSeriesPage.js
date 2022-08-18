@@ -26,9 +26,6 @@ const TVSeriesPage = (props) => {
     <TVSeriesListPageTemplate
       title='TV Series'
       tvSeries={tvSeries}
-      action={(tvSeries) => {
-        return <AddToMustWatchIcon series={tvSeries} />
-      }}
     />
   );
 };

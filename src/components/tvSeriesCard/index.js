@@ -26,20 +26,6 @@ const useStyles = makeStyles({
 
 export default function TVSeriesCard({ series, action }) {
   const classes = useStyles();
-  const { favouriteTVSeries } = useContext(MoviesContext);
-  const { myMustWatchTVSeries } = useContext(MoviesContext);
-
-  if (favouriteTVSeries.find((id) => id === series.id)) {
-    series.favouriteTVSeries = true;
-  } else {
-    series.favouriteTVSeries = false
-  };
-
-  if (myMustWatchTVSeries.find((id) => id === series.id)) {
-    series.myMustWatchTVSeries = true;
-  } else {
-    series.myMustWatchTVSeries = false
-  }
 
 
 
@@ -90,7 +76,6 @@ export default function TVSeriesCard({ series, action }) {
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
-        {action(series)}
         <Link to={`/tvseries/${series.id}`}>
           <Button variant="outlined" size="medium" color="primary">
             More Info ...
