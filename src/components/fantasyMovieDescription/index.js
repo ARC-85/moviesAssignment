@@ -1,16 +1,10 @@
 import React, { useContext } from "react";
-
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-
 import { MoviesContext } from "../../contexts/moviesContext";
 import CharacterList from "../characterList";
 import Grid from "@material-ui/core/Grid";
-import { useQueries } from "react-query";
-import { getPerson } from "../../api/tmdb-api";
-import Spinner from "../../components/spinner";
-import Role from "../roleCard";
 import Chip from "@material-ui/core/Chip";
 import Paper from "@material-ui/core/Paper";
 
@@ -56,48 +50,6 @@ const FantasyMovieDescription = () => {
 
   const myGenresArray = myFantasyMovie.myGenres;
   console.log(myGenresArray);
-
-  
-
-  /*if (myFantasyMovie.fantasyTitle !== "undefined") {
-    myFantasyMovie.fantasyTitle = ""
-  }
-  else {
-    myFantasyMovie.fantasyTitle = myFantasyMovie.fantasyTitle
-  }*/
-
-  const personRoleQueries = useQueries(
-    roleArray.map((personId) => {
-      return {
-        queryKey: ["person", { id: personId.id }],
-        queryFn: getPerson,
-        character: personId.charcter,
-
-      };
-      
-    })
-  );
-  console.log(personRoleQueries);
-  // Check if any of the parallel queries is still loading.
-  const isLoading = personRoleQueries.find((p) => p.isLoading === true);
-
-  if (isLoading) {
-    return <Spinner />;
-  }
-
-  const persons = personRoleQueries.map((q) => {
-    return q.data;
-  }); 
- 
-
-  const combinedPersons = [{...roleArray}];
-  console.log(combinedPersons);
-
-  
-
-       
-
-
 
   return (
     <Box component="div" className={classes.root}>
