@@ -24,10 +24,14 @@ function PersonListPageTemplate({ persons, title, action }) {
   const classes = useStyles();
   const [nameFilter, setNameFilter] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [sortType, setSortType] = useState('none');
 
  let displayedPersons = persons
     .filter((p) => {
       return p.name.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
+    })
+    .sort((a, b) => {
+      return b[sortType] > a[sortType] ? -1 : 1
     });
 
   const handleChange = (type, value) => {
@@ -60,6 +64,8 @@ function PersonListPageTemplate({ persons, title, action }) {
         <FilterPersonsCard
           onUserInput={handleChange}
           nameFilter={nameFilter}
+          setSortType={setSortType}
+          sortType={sortType}
         />
       </Drawer>
     </>    

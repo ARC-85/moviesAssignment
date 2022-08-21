@@ -98,6 +98,16 @@ export default function FilterTVSeriesCard(props) {
             Sort the tv series.
           </Typography>
         </CardContent>
+        <Select 
+          
+          value={props.sortType}
+          onChange={(e) => props.setSortType(e.target.value)}
+          >
+            <MenuItem value="none" disabled>None</MenuItem>
+            <MenuItem value="name">TV Series Name</MenuItem>
+            <MenuItem value="vote_average">Popularity</MenuItem>
+            
+          </Select>
       </Card>
       </>
   );

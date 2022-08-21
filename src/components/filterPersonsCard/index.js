@@ -4,11 +4,11 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 // import InputLabel from "@material-ui/core/InputLabel";
-// import MenuItem from "@material-ui/core/MenuItem";
+import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 // import FormControl from "@material-ui/core/FormControl";
-// import Select from "@material-ui/core/Select";
+import Select from "@material-ui/core/Select";
 // import { getGenres } from "../../api/tmdb-api";
 // import { useQuery } from "react-query";
 // import Spinner from '../spinner'
@@ -70,6 +70,16 @@ export default function FilterPersonsCard(props) {
             Sort the actors.
           </Typography>
         </CardContent>
+        <Select 
+          
+          value={props.sortType}
+          onChange={(e) => props.setSortType(e.target.value)}
+          >
+            <MenuItem value="none" disabled>None</MenuItem>
+            <MenuItem value="name">Actor Name</MenuItem>
+            <MenuItem value="popularity">Popularity</MenuItem>
+            
+          </Select>
       </Card>
       </>
   );

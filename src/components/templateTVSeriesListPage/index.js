@@ -25,6 +25,7 @@ function TVSeriesListPageTemplate({ tvSeries, title, action }) {
   const [seriesFilter, setSeriesFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [sortType, setSortType] = useState('none');
 
   const genreId = Number(genreFilter);
 
@@ -34,6 +35,9 @@ function TVSeriesListPageTemplate({ tvSeries, title, action }) {
     })
     .filter((t) => {
       return genreId > 0 ? t.genre_ids.includes(genreId) : true;
+    })
+    .sort((a, b) => {
+      return b[sortType] > a[sortType] ? -1 : 1
     });
 
   const handleChange = (type, value) => {
@@ -68,6 +72,8 @@ function TVSeriesListPageTemplate({ tvSeries, title, action }) {
           onUserInput={handleChange}
           seriesFilter={seriesFilter}
           genreFilter={genreFilter}
+          setSortType={setSortType}
+          sortType={sortType}
         />
       </Drawer>
     </>    
