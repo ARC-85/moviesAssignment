@@ -29,7 +29,8 @@ To set up the app, download the code and use your preferred IDE (e.g. Visual Stu
 
 Head to the TMBD website and follow the steps to set up an account and receive a free API key (https://www.themoviedb.org/documentation/api).
 
-Within the MOVIESASSIGNMENT folder, create a .env file with the following items:
+Within the root folder, create a .env file with the following items:
+
 REACT_APP_TMDB_KEY=[insert_your_API_key]
 FAST_REFRESH=false
 
