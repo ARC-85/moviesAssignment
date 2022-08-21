@@ -186,6 +186,7 @@ Independent learning related to:
 
 Sorting - as learned here: https://codedec.com/tutorials/how-to-do-sorting-in-react/
 Date selection - as learned here: https://material-ui-pickers.dev/getting-started/usage
+Running multiple queries (e.g. similar movies) - as learned here: https://github.com/trojanowski/react-apollo-hooks/issues/120
 
 
 
